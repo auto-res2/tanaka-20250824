@@ -1,0 +1,85 @@
+name: Compile LaTeX
+
+on:
+  workflow_dispatch:
+    inputs:
+      subdir:
+        description: 'Subdirectory under .research/latex/ (e.g., iclr2025)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  compile-latex:
+    runs-on: ubuntu-latest
+
+    env:
+      SUBDIR: ${{ github.event.inputs.subdir }}
+      LATEX_DIR: .research/latex/${{ github.event.inputs.subdir }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install TeX packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-base \
+            texlive-latex-recommended \
+            texlive-fonts-recommended \
+            texlive-latex-extra \
+            texlive-science
+
+      - name: Copy latest images
+        run: |
+          latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
+          src_dir=".research/iteration${latest}/images"
+          dest_dir="${LATEX_DIR}/images"
+          echo "Copying from $src_dir to $dest_dir"
+
+          mkdir -p "$dest_dir"
+          cp -r "$src_dir"/* "$dest_dir" || echo "No images to copy"
+
+      - name: Compile paper.tex and capture errors
+        run: |
+          cd "$LATEX_DIR"
+
+          TEXFILE="paper.tex"
+          BASENAME="paper"
+
+          if [ ! -f "$TEXFILE" ]; then
+            echo "Error: $TEXFILE not found in $LATEX_DIR"
+            exit 1
+          fi
+
+          LOGFILE="latex-error.log"
+          : > "$LOGFILE"
+
+          pdflatex -interaction=nonstopmode "$TEXFILE" >> "$LOGFILE" 2>&1 || true
+          bibtex "$BASENAME" >> "$LOGFILE" 2>&1 || true
+          pdflatex -interaction=nonstopmode "$TEXFILE" >> "$LOGFILE" 2>&1 || true
+          pdflatex -interaction=nonstopmode "$TEXFILE" >> "$LOGFILE" 2>&1 || true
+
+      - name: Move compiled PDF to .research/
+        run: |
+          src="${LATEX_DIR}/paper.pdf"
+          dest=".research/paper.pdf"
+          if [ -f "$src" ]; then
+            mv "$src" "$dest"
+          else
+            echo "Warning: Compiled PDF not found at $src"
+          fi
+
+      - name: Commit and push LaTeX outputs
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add "${LATEX_DIR}/images" || true
+          git add -f "${LATEX_DIR}/latex-error.log" || true
+          git add -f ".research/paper.pdf" || true
+          git commit -m "Add compiled paper.pdf to .research/ and logs to latex/${SUBDIR}" || echo "No changes to commit"
+          git push origin "${{ github.ref_name }}"

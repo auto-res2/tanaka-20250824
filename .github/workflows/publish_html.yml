@@ -1,0 +1,57 @@
+name: publish_html
+
+on:
+  workflow_dispatch:
+
+jobs:
+  convert-and-upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install PDF to PNG tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Get latest iterationX/images and convert PDF to PNG
+        run: |
+          latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
+          img_dir=".research/iteration${latest}/images"
+          echo "Found directory: $img_dir"
+          mkdir -p output_images
+          for pdf in "$img_dir"/*.pdf; do
+            name=$(basename "$pdf" .pdf)
+            pdftoppm "$pdf" "output_images/${name}" -png
+          done
+
+          for png in output_images/*-1.png; do
+            base=$(basename "$png" -1.png)
+            mv "$png" "output_images/${base}.png"
+          done
+
+      - name: Switch to gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages
+
+      - name: Copy converted PNGs to gh-pages branch
+        run: |
+          target_dir="branches/${{ github.ref_name }}/images"
+          mkdir -p "$target_dir"
+          cp output_images/*.png "$target_dir"
+
+      - name: Commit and push to gh-pages
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add branches/
+          git commit -m "Upload PNGs from ${{ github.ref_name }}"
+          git push origin gh-pages

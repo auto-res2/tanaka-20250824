@@ -1,0 +1,72 @@
+name: Execute Experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      experiment_iteration:
+        description: "Iteration count"
+        required: true
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  execution-of-automated-research-methods:
+    name: Execution of automated research methods
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Prepare iteration dir
+        run: |
+          mkdir -p .research
+          iteration_dir=".research/iteration${{ github.event.inputs.experiment_iteration }}"
+          mkdir -p "$iteration_dir"
+          echo "ITERATION_DIR=$iteration_dir" >> "$GITHUB_ENV"
+
+      - name: Install dependencies (log to output/error)
+        run: |
+          set -o pipefail
+          echo "=== pip install start $(date -u) ===" | tee -a "$ITERATION_DIR/output.txt"
+          pip install -r requirements.txt \
+            > >(tee -a "$ITERATION_DIR/output.txt") \
+            2> >(tee -a "$ITERATION_DIR/error.txt" >&2)
+          echo "=== pip install end $(date -u) ===" | tee -a "$ITERATION_DIR/output.txt"
+        continue-on-error: true
+
+      - name: Run experiment (log to output/error)
+        if: always()
+        run: |
+          set -o pipefail
+          echo "=== experiment start $(date -u) ===" | tee -a "$ITERATION_DIR/output.txt"
+          python src/main.py \
+            > >(tee -a "$ITERATION_DIR/output.txt") \
+            2> >(tee -a "$ITERATION_DIR/error.txt" >&2)
+          echo "=== experiment end $(date -u) ===" | tee -a "$ITERATION_DIR/output.txt"
+        continue-on-error: true
+
+      - name: Commit and push results
+        if: always()
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .research/
+          git commit -m "Add experiment results (iteration ${{ github.event.inputs.experiment_iteration }})" || echo "No changes to commit"
+          
+          for i in {1..5}; do
+            git push && break
+            echo "Push failed on attempt $i. Retrying in $((2**i)) seconds..."
+            sleep $((2**i))
+          done
