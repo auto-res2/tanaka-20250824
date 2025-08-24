@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/runner/work/tanaka-20250824/tanaka-20250824/src/main.py", line 6, in <module>
+    from src.preprocess import preprocess
+ModuleNotFoundError: No module named 'src'
