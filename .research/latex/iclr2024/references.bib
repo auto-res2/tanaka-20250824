@@ -5,3 +5,509 @@
   publisher = {GitHub},
   url       = {https://github.com/airas-org/airas}
 }
+
+% ===========================================
+% REQUIRED CITATIONS
+% These papers must be cited in the manuscript
+% ===========================================
+
+@article{chen_2024_texttt,
+ abstract = {Mixture-of-Experts (MoE) has gained increasing popularity as a promising
+framework for scaling up large language models (LLMs). However, the reliability
+assessment of MoE lags behind its surging applications. Moreover, when
+transferred to new domains such as in fine-tuning MoE models sometimes
+underperform their dense counterparts. Motivated by the research gap and
+counter-intuitive phenomenon, we propose $\texttt{MoE-RBench}$, the first
+comprehensive assessment of SMoE reliability from three aspects: $\textit{(i)}$
+safety and hallucination, $\textit{(ii)}$ resilience to adversarial attacks,
+and $\textit{(iii)}$ out-of-distribution robustness. Extensive models and
+datasets are tested to compare the MoE to dense networks from these reliability
+dimensions. Our empirical observations suggest that with appropriate
+hyperparameters, training recipes, and inference techniques, we can build the
+MoE model more reliably than the dense LLM. In particular, we find that the
+robustness of SMoE is sensitive to the basic training settings. We hope that
+this study can provide deeper insights into how to adapt the pre-trained MoE
+model to other tasks with higher-generation security, quality, and stability.
+Codes are available at https://github.com/UNITES-Lab/MoE-RBench},
+ arxiv_url = {https://arxiv.org/pdf/2406.11353v1.pdf},
+ author = {Guanjie Chen and Xinyu Zhao and Tianlong Chen and Yu Cheng},
+ github_url = {https://github.com/UNITES-Lab/MoE-RBench},
+ title = {$\texttt{MoE-RBench}$: Towards Building Reliable Language Models with Sparse Mixture-of-Experts},
+ year = {2024}
+}
+
+@article{csords_2024_moeut,
+ abstract = {Previous work on Universal Transformers (UTs) has demonstrated the importance
+of parameter sharing across layers. By allowing recurrence in depth, UTs have
+advantages over standard Transformers in learning compositional
+generalizations, but layer-sharing comes with a practical limitation of
+parameter-compute ratio: it drastically reduces the parameter count compared to
+the non-shared model with the same dimensionality. Naively scaling up the layer
+size to compensate for the loss of parameters makes its computational resource
+requirements prohibitive. In practice, no previous work has succeeded in
+proposing a shared-layer Transformer design that is competitive in parameter
+count-dominated tasks such as language modeling. Here we propose MoEUT
+(pronounced "moot"), an effective mixture-of-experts (MoE)-based shared-layer
+Transformer architecture, which combines several recent advances in MoEs for
+both feedforward and attention layers of standard Transformers together with
+novel layer-normalization and grouping schemes that are specific and crucial to
+UTs. The resulting UT model, for the first time, slightly outperforms standard
+Transformers on language modeling tasks such as BLiMP and PIQA, while using
+significantly less compute and memory.},
+ arxiv_url = {https://arxiv.org/pdf/2405.16039v2.pdf},
+ author = {Róbert Csordás and Kazuki Irie and Jürgen Schmidhuber and Christopher Potts and Christopher D. Manning},
+ github_url = {https://github.com/robertcsordas/moeut},
+ title = {MoEUT: Mixture-of-Experts Universal Transformers},
+ year = {2024}
+}
+
+@article{egiazarian_2024_extreme,
+ abstract = {The emergence of accurate open large language models (LLMs) has led to a race
+towards performant quantization techniques which can enable their execution on
+end-user devices. In this paper, we revisit the problem of "extreme" LLM
+compression-defined as targeting extremely low bit counts, such as 2 to 3 bits
+per parameter-from the point of view of classic methods in Multi-Codebook
+Quantization (MCQ). Our algorithm, called AQLM, generalizes the classic
+Additive Quantization (AQ) approach for information retrieval to advance the
+state-of-the-art in LLM compression, via two innovations: 1) learned additive
+quantization of weight matrices in input-adaptive fashion, and 2) joint
+optimization of codebook parameters across each transformer blocks. Broadly,
+AQLM is the first scheme that is Pareto optimal in terms of
+accuracy-vs-model-size when compressing to less than 3 bits per parameter, and
+significantly improves upon all known schemes in the extreme compression (2bit)
+regime. In addition, AQLM is practical: we provide fast GPU and CPU
+implementations of AQLM for token generation, which enable us to match or
+outperform optimized FP16 implementations for speed, while executing in a much
+smaller memory footprint.},
+ arxiv_url = {https://arxiv.org/pdf/2401.06118v4.pdf},
+ author = {Vage Egiazarian and Andrei Panferov and Denis Kuznedelev and Elias Frantar and Artem Babenko and Dan Alistarh},
+ github_url = {https://github.com/Vahe1994/AQLM},
+ title = {Extreme Compression of Large Language Models via Additive Quantization},
+ year = {2024}
+}
+
+@article{hu_2023_sparse,
+ abstract = {We introduce the sparse modern Hopfield model as a sparse extension of the
+modern Hopfield model. Like its dense counterpart, the sparse modern Hopfield
+model equips a memory-retrieval dynamics whose one-step approximation
+corresponds to the sparse attention mechanism. Theoretically, our key
+contribution is a principled derivation of a closed-form sparse Hopfield energy
+using the convex conjugate of the sparse entropic regularizer. Building upon
+this, we derive the sparse memory retrieval dynamics from the sparse energy
+function and show its one-step approximation is equivalent to the
+sparse-structured attention. Importantly, we provide a sparsity-dependent
+memory retrieval error bound which is provably tighter than its dense analog.
+The conditions for the benefits of sparsity to arise are therefore identified
+and discussed. In addition, we show that the sparse modern Hopfield model
+maintains the robust theoretical properties of its dense counterpart, including
+rapid fixed point convergence and exponential memory capacity. Empirically, we
+use both synthetic and real-world datasets to demonstrate that the sparse
+Hopfield model outperforms its dense counterpart in many situations.},
+ arxiv_url = {https://arxiv.org/pdf/2309.12673v2.pdf},
+ author = {Jerry Yao-Chieh Hu and Donglin Yang and Dennis Wu and Chenwei Xu and Bo-Yu Chen and Han Liu},
+ github_url = {https://github.com/OpenNMT/OpenNMT-py},
+ title = {On Sparse Modern Hopfield Model},
+ year = {2023}
+}
+
+@article{kitaev_2020_reformer,
+ abstract = {Large Transformer models routinely achieve state-of-the-art results on a
+number of tasks but training these models can be prohibitively costly,
+especially on long sequences. We introduce two techniques to improve the
+efficiency of Transformers. For one, we replace dot-product attention by one
+that uses locality-sensitive hashing, changing its complexity from O($L^2$) to
+O($L\log L$), where $L$ is the length of the sequence. Furthermore, we use
+reversible residual layers instead of the standard residuals, which allows
+storing activations only once in the training process instead of $N$ times,
+where $N$ is the number of layers. The resulting model, the Reformer, performs
+on par with Transformer models while being much more memory-efficient and much
+faster on long sequences.},
+ arxiv_url = {https://arxiv.org/pdf/2001.04451v2.pdf},
+ author = {Nikita Kitaev and Łukasz Kaiser and Anselm Levskaya},
+ github_url = {https://github.com/google/trax},
+ title = {Reformer: The Efficient Transformer},
+ year = {2020}
+}
+
+@article{li_2020_sac,
+ abstract = {While the self-attention mechanism has been widely used in a wide variety of
+tasks, it has the unfortunate property of a quadratic cost with respect to the
+input length, which makes it difficult to deal with long inputs. In this paper,
+we present a method for accelerating and structuring self-attentions: Sparse
+Adaptive Connection (SAC). In SAC, we regard the input sequence as a graph and
+attention operations are performed between linked nodes. In contrast with
+previous self-attention models with pre-defined structures (edges), the model
+learns to construct attention edges to improve task-specific performances. In
+this way, the model is able to select the most salient nodes and reduce the
+quadratic complexity regardless of the sequence length. Based on SAC, we show
+that previous variants of self-attention models are its special cases. Through
+extensive experiments on neural machine translation, language modeling, graph
+representation learning and image classification, we demonstrate SAC is
+competitive with state-of-the-art models while significantly reducing memory
+cost.},
+ arxiv_url = {https://arxiv.org/pdf/2003.09833v3.pdf},
+ author = {Xiaoya Li and Yuxian Meng and Mingxin Zhou and Qinghong Han and Fei Wu and Jiwei Li},
+ title = {SAC: Accelerating and Structuring Self-Attention via Sparse Adaptive Connection},
+ year = {2020}
+}
+
+@article{liu_2023_qllm,
+ abstract = {Large Language Models (LLMs) excel in NLP, but their demands hinder their
+widespread deployment. While Quantization-Aware Training (QAT) offers a
+solution, its extensive training costs make Post-Training Quantization (PTQ) a
+more practical approach for LLMs. In existing studies, activation outliers in
+particular channels are identified as the bottleneck to PTQ accuracy. They
+propose to transform the magnitudes from activations to weights, which however
+offers limited alleviation or suffers from unstable gradients, resulting in a
+severe performance drop at low-bitwidth. In this paper, we propose QLLM, an
+accurate and efficient low-bitwidth PTQ method designed for LLMs. QLLM
+introduces an adaptive channel reassembly technique that reallocates the
+magnitude of outliers to other channels, thereby mitigating their impact on the
+quantization range. This is achieved by channel disassembly and channel
+assembly, which first breaks down the outlier channels into several
+sub-channels to ensure a more balanced distribution of activation magnitudes.
+Then similar channels are merged to maintain the original channel number for
+efficiency. Additionally, an adaptive strategy is designed to autonomously
+determine the optimal number of sub-channels for channel disassembly. To
+further compensate for the performance loss caused by quantization, we propose
+an efficient tuning method that only learns a small number of low-rank weights
+while freezing the pre-trained quantized model. After training, these low-rank
+parameters can be fused into the frozen weights without affecting inference.
+Extensive experiments on LLaMA-1 and LLaMA-2 show that QLLM can obtain accurate
+quantized models efficiently. For example, QLLM quantizes the 4-bit LLaMA-2-70B
+within 10 hours on a single A100-80G GPU, outperforming the previous
+state-of-the-art method by 7.89% on the average accuracy across five zero-shot
+tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2310.08041v3.pdf},
+ author = {Jing Liu and Ruihao Gong and Xiuying Wei and Zhiwei Dong and Jianfei Cai and Bohan Zhuang},
+ github_url = {https://github.com/PanQiWei/AutoGPTQ},
+ title = {QLLM: Accurate and Efficient Low-Bitwidth Quantization for Large Language Models},
+ year = {2023}
+}
+
+@article{so_2021_searching,
+ abstract = {Large Transformer models have been central to recent advances in natural
+language processing. The training and inference costs of these models, however,
+have grown rapidly and become prohibitively expensive. Here we aim to reduce
+the costs of Transformers by searching for a more efficient variant. Compared
+to previous approaches, our search is performed at a lower level, over the
+primitives that define a Transformer TensorFlow program. We identify an
+architecture, named Primer, that has a smaller training cost than the original
+Transformer and other variants for auto-regressive language modeling. Primer's
+improvements can be mostly attributed to two simple modifications: squaring
+ReLU activations and adding a depthwise convolution layer after each Q, K, and
+V projection in self-attention.
+  Experiments show Primer's gains over Transformer increase as compute scale
+grows and follow a power law with respect to quality at optimal model sizes. We
+also verify empirically that Primer can be dropped into different codebases to
+significantly speed up training without additional tuning. For example, at a
+500M parameter size, Primer improves the original T5 architecture on C4
+auto-regressive language modeling, reducing the training cost by 4X.
+Furthermore, the reduced training cost means Primer needs much less compute to
+reach a target one-shot performance. For instance, in a 1.9B parameter
+configuration similar to GPT-3 XL, Primer uses 1/3 of the training compute to
+achieve the same one-shot performance as Transformer. We open source our models
+and several comparisons in T5 to help with reproducibility.},
+ arxiv_url = {https://arxiv.org/pdf/2109.08668v2.pdf},
+ author = {David R. So and Wojciech Mańke and Hanxiao Liu and Zihang Dai and Noam Shazeer and Quoc V. Le},
+ github_url = {https://github.com/google-research/google-research},
+ title = {Searching for Efficient Transformers for Language Modeling},
+ year = {2021}
+}
+
+@article{wang_2020_minilm,
+ abstract = {Pre-trained language models (e.g., BERT (Devlin et al., 2018) and its
+variants) have achieved remarkable success in varieties of NLP tasks. However,
+these models usually consist of hundreds of millions of parameters which brings
+challenges for fine-tuning and online serving in real-life applications due to
+latency and capacity constraints. In this work, we present a simple and
+effective approach to compress large Transformer (Vaswani et al., 2017) based
+pre-trained models, termed as deep self-attention distillation. The small model
+(student) is trained by deeply mimicking the self-attention module, which plays
+a vital role in Transformer networks, of the large model (teacher).
+Specifically, we propose distilling the self-attention module of the last
+Transformer layer of the teacher, which is effective and flexible for the
+student. Furthermore, we introduce the scaled dot-product between values in the
+self-attention module as the new deep self-attention knowledge, in addition to
+the attention distributions (i.e., the scaled dot-product of queries and keys)
+that have been used in existing works. Moreover, we show that introducing a
+teacher assistant (Mirzadeh et al., 2019) also helps the distillation of large
+pre-trained Transformer models. Experimental results demonstrate that our
+monolingual model outperforms state-of-the-art baselines in different parameter
+size of student models. In particular, it retains more than 99% accuracy on
+SQuAD 2.0 and several GLUE benchmark tasks using 50% of the Transformer
+parameters and computations of the teacher model. We also obtain competitive
+results in applying deep self-attention distillation to multilingual
+pre-trained models.},
+ arxiv_url = {https://arxiv.org/pdf/2002.10957v2.pdf},
+ author = {Wenhui Wang and Furu Wei and Li Dong and Hangbo Bao and Nan Yang and Ming Zhou},
+ title = {MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers},
+ year = {2020}
+}
+
+@article{xiao_2022_smoothquant,
+ abstract = {Large language models (LLMs) show excellent performance but are compute- and
+memory-intensive. Quantization can reduce memory and accelerate inference.
+However, existing methods cannot maintain accuracy and hardware efficiency at
+the same time. We propose SmoothQuant, a training-free, accuracy-preserving,
+and general-purpose post-training quantization (PTQ) solution to enable 8-bit
+weight, 8-bit activation (W8A8) quantization for LLMs. Based on the fact that
+weights are easy to quantize while activations are not, SmoothQuant smooths the
+activation outliers by offline migrating the quantization difficulty from
+activations to weights with a mathematically equivalent transformation.
+SmoothQuant enables an INT8 quantization of both weights and activations for
+all the matrix multiplications in LLMs, including OPT, BLOOM, GLM, MT-NLG,
+Llama-1/2, Falcon, Mistral, and Mixtral models. We demonstrate up to 1.56x
+speedup and 2x memory reduction for LLMs with negligible loss in accuracy.
+SmoothQuant enables serving 530B LLM within a single node. Our work offers a
+turn-key solution that reduces hardware costs and democratizes LLMs. Code is
+available at https://github.com/mit-han-lab/smoothquant.},
+ arxiv_url = {https://arxiv.org/pdf/2211.10438v7.pdf},
+ author = {Guangxuan Xiao and Ji Lin and Mickael Seznec and Hao Wu and Julien Demouth and Song Han},
+ github_url = {https://github.com/mit-han-lab/smoothquant},
+ title = {SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models},
+ year = {2022}
+}
+
+@article{xu_2022_few,
+ abstract = {Knowledge distillation (KD) methods compress large models into smaller
+students with manually-designed student architectures given pre-specified
+computational cost. This requires several trials to find a viable student, and
+further repeating the process for each student or computational budget change.
+We use Neural Architecture Search (NAS) to automatically distill several
+compressed students with variable cost from a large model. Current works train
+a single SuperLM consisting of millions of subnetworks with weight-sharing,
+resulting in interference between subnetworks of different sizes. Our framework
+AutoDistil addresses above challenges with the following steps: (a)
+Incorporates inductive bias and heuristics to partition Transformer search
+space into K compact sub-spaces (K=3 for typical student sizes of base, small
+and tiny); (b) Trains one SuperLM for each sub-space using task-agnostic
+objective (e.g., self-attention distillation) with weight-sharing of students;
+(c) Lightweight search for the optimal student without re-training. Fully
+task-agnostic training and search allow students to be reused for fine-tuning
+on any downstream task. Experiments on GLUE benchmark against state-of-the-art
+KD and NAS methods demonstrate AutoDistil to outperform leading compression
+techniques with upto 2.7x reduction in computational cost and negligible loss
+in task performance.},
+ arxiv_url = {https://arxiv.org/pdf/2201.12507v2.pdf},
+ author = {Dongkuan Xu and Subhabrata Mukherjee and Xiaodong Liu and Debadeepta Dey and Wenhui Wang and Xiang Zhang and Ahmed Hassan Awadallah and Jianfeng Gao},
+ title = {Few-shot Task-agnostic Neural Architecture Search for Distilling Large Language Models},
+ year = {2022}
+}
+
+@article{yang_2024_what,
+ abstract = {Dataset distillation has emerged as a strategy to overcome the hurdles
+associated with large datasets by learning a compact set of synthetic data that
+retains essential information from the original dataset. While distilled data
+can be used to train high performing models, little is understood about how the
+information is stored. In this study, we posit and answer three questions about
+the behavior, representativeness, and point-wise information content of
+distilled data. We reveal distilled data cannot serve as a substitute for real
+data during training outside the standard evaluation setting for dataset
+distillation. Additionally, the distillation process retains high task
+performance by compressing information related to the early training dynamics
+of real models. Finally, we provide an framework for interpreting distilled
+data and reveal that individual distilled data points contain meaningful
+semantic information. This investigation sheds light on the intricate nature of
+distilled data, providing a better understanding on how they can be effectively
+utilized.},
+ arxiv_url = {https://arxiv.org/pdf/2406.04284v2.pdf},
+ author = {William Yang and Ye Zhu and Zhiwei Deng and Olga Russakovsky},
+ title = {What is Dataset Distillation Learning?},
+ year = {2024}
+}
+
+@article{yun_2020_connections,
+ abstract = {Recently, Transformer networks have redefined the state of the art in many
+NLP tasks. However, these models suffer from quadratic computational cost in
+the input sequence length $n$ to compute pairwise attention in each layer. This
+has prompted recent research into sparse Transformers that sparsify the
+connections in the attention layers. While empirically promising for long
+sequences, fundamental questions remain unanswered: Can sparse Transformers
+approximate any arbitrary sequence-to-sequence function, similar to their dense
+counterparts? How does the sparsity pattern and the sparsity level affect their
+performance? In this paper, we address these questions and provide a unifying
+framework that captures existing sparse attention models. We propose sufficient
+conditions under which we prove that a sparse attention model can universally
+approximate any sequence-to-sequence function. Surprisingly, our results show
+that sparse Transformers with only $O(n)$ connections per attention layer can
+approximate the same function class as the dense model with $n^2$ connections.
+Lastly, we present experiments comparing different patterns/levels of sparsity
+on standard NLP tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2006.04862v2.pdf},
+ author = {Chulhee Yun and Yin-Wen Chang and Srinadh Bhojanapalli and Ankit Singh Rawat and Sashank J. Reddi and Sanjiv Kumar},
+ title = {O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers},
+ year = {2020}
+}
+
+@article{zadouri_2023_pushing,
+ abstract = {The Mixture of Experts (MoE) is a widely known neural architecture where an
+ensemble of specialized sub-models optimizes overall performance with a
+constant computational cost. However, conventional MoEs pose challenges at
+scale due to the need to store all experts in memory. In this paper, we push
+MoE to the limit. We propose extremely parameter-efficient MoE by uniquely
+combining MoE architecture with lightweight experts.Our MoE architecture
+outperforms standard parameter-efficient fine-tuning (PEFT) methods and is on
+par with full fine-tuning by only updating the lightweight experts -- less than
+1% of an 11B parameters model. Furthermore, our method generalizes to unseen
+tasks as it does not depend on any prior task knowledge. Our research
+underscores the versatility of the mixture of experts architecture, showcasing
+its ability to deliver robust performance even when subjected to rigorous
+parameter constraints. Our code used in all the experiments is publicly
+available here: https://github.com/for-ai/parameter-efficient-moe.},
+ arxiv_url = {https://arxiv.org/pdf/2309.05444v1.pdf},
+ author = {Ted Zadouri and Ahmet Üstün and Arash Ahmadian and Beyza Ermiş and Acyr Locatelli and Sara Hooker},
+ github_url = {https://github.com/for-ai/parameter-efficient-moe},
+ title = {Pushing Mixture of Experts to the Limit: Extremely Parameter Efficient MoE for Instruction Tuning},
+ year = {2023}
+}
+
+@article{zhang_2022_cab,
+ abstract = {Transformer has achieved remarkable success in language, image, and speech
+processing. Recently, various efficient attention architectures have been
+proposed to improve transformer's efficiency while largely preserving its
+efficacy, especially in modeling long sequences. A widely-used benchmark to
+test these efficient methods' capability on long-range modeling is Long Range
+Arena (LRA). However, LRA only focuses on the standard bidirectional (or
+noncausal) self attention, and completely ignores cross attentions and
+unidirectional (or causal) attentions, which are equally important to
+downstream applications. In this paper, we propose Comprehensive Attention
+Benchmark (CAB) under a fine-grained attention taxonomy with four
+distinguishable attention patterns, namely, noncausal self, causal self,
+noncausal cross, and causal cross attentions. CAB collects seven real-world
+tasks from different research areas to evaluate efficient attentions under the
+four attention patterns. Among these tasks, CAB validates efficient attentions
+in eight backbone networks to show their generalization across neural
+architectures. We conduct exhaustive experiments to benchmark the performances
+of nine widely-used efficient attention architectures designed with different
+philosophies on CAB. Extensive experimental results also shed light on the
+fundamental problems of efficient attentions, such as efficiency length against
+vanilla attention, performance consistency across attention patterns, the
+benefit of attention mechanisms, and interpolation/extrapolation on
+long-context language modeling.},
+ arxiv_url = {https://arxiv.org/pdf/2210.07661v4.pdf},
+ author = {Jun Zhang and Shuyang Jiang and Jiangtao Feng and Lin Zheng and Lingpeng Kong},
+ github_url = {https://github.com/Shark-NLP/CAB},
+ title = {CAB: Comprehensive Attention Benchmarking on Long Sequence Modeling},
+ year = {2022}
+}
+
+% ===========================================
+% REFERENCE CANDIDATES
+% Additional reference papers for context
+% ===========================================
+
+@article{brown_2020_language,
+ abstract = {Recent work has demonstrated substantial gains on many NLP tasks and
+benchmarks by pre-training on a large corpus of text followed by fine-tuning on
+a specific task. While typically task-agnostic in architecture, this method
+still requires task-specific fine-tuning datasets of thousands or tens of
+thousands of examples. By contrast, humans can generally perform a new language
+task from only a few examples or from simple instructions - something which
+current NLP systems still largely struggle to do. Here we show that scaling up
+language models greatly improves task-agnostic, few-shot performance, sometimes
+even reaching competitiveness with prior state-of-the-art fine-tuning
+approaches. Specifically, we train GPT-3, an autoregressive language model with
+175 billion parameters, 10x more than any previous non-sparse language model,
+and test its performance in the few-shot setting. For all tasks, GPT-3 is
+applied without any gradient updates or fine-tuning, with tasks and few-shot
+demonstrations specified purely via text interaction with the model. GPT-3
+achieves strong performance on many NLP datasets, including translation,
+question-answering, and cloze tasks, as well as several tasks that require
+on-the-fly reasoning or domain adaptation, such as unscrambling words, using a
+novel word in a sentence, or performing 3-digit arithmetic. At the same time,
+we also identify some datasets where GPT-3's few-shot learning still struggles,
+as well as some datasets where GPT-3 faces methodological issues related to
+training on large web corpora. Finally, we find that GPT-3 can generate samples
+of news articles which human evaluators have difficulty distinguishing from
+articles written by humans. We discuss broader societal impacts of this finding
+and of GPT-3 in general.},
+ arxiv_url = {https://arxiv.org/pdf/2005.14165v4.pdf},
+ author = {Tom B. Brown and Benjamin Mann and Nick Ryder and Melanie Subbiah and Jared Kaplan and Prafulla Dhariwal and Arvind Neelakantan and Pranav Shyam and Girish Sastry and Amanda Askell and Sandhini Agarwal and Ariel Herbert-Voss and Gretchen Krueger and Tom Henighan and Rewon Child and Aditya Ramesh and Daniel M. Ziegler and Jeffrey Wu and Clemens Winter and Christopher Hesse and Mark Chen and Eric Sigler and Mateusz Litwin and Scott Gray and Benjamin Chess and Jack Clark and Christopher Berner and Sam McCandlish and Alec Radford and Ilya Sutskever and Dario Amodei},
+ title = {Language models are few-shot learners},
+ year = {2020}
+}
+
+@article{devlin_2018_bert,
+ abstract = {We introduce a new language representation model called BERT, which stands
+for Bidirectional Encoder Representations from Transformers. Unlike recent
+language representation models, BERT is designed to pre-train deep
+bidirectional representations from unlabeled text by jointly conditioning on
+both left and right context in all layers. As a result, the pre-trained BERT
+model can be fine-tuned with just one additional output layer to create
+state-of-the-art models for a wide range of tasks, such as question answering
+and language inference, without substantial task-specific architecture
+modifications.
+  BERT is conceptually simple and empirically powerful. It obtains new
+state-of-the-art results on eleven natural language processing tasks, including
+pushing the GLUE score to 80.5% (7.7% point absolute improvement), MultiNLI
+accuracy to 86.7% (4.6% absolute improvement), SQuAD v1.1 question answering
+Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1
+(5.1 point absolute improvement).},
+ arxiv_url = {https://arxiv.org/pdf/1810.04805v2.pdf},
+ author = {Jacob Devlin and Ming-Wei Chang and Kenton Lee and Kristina Toutanova},
+ title = {BERT: Pre-training of deep bidirectional transformers for language understanding},
+ year = {2018}
+}
+
+@article{ren_2020_fastspeech,
+ abstract = {Non-autoregressive text to speech (TTS) models such as FastSpeech can
+synthesize speech significantly faster than previous autoregressive models with
+comparable quality. The training of FastSpeech model relies on an
+autoregressive teacher model for duration prediction (to provide more
+information as input) and knowledge distillation (to simplify the data
+distribution in output), which can ease the one-to-many mapping problem (i.e.,
+multiple speech variations correspond to the same text) in TTS. However,
+FastSpeech has several disadvantages: 1) the teacher-student distillation
+pipeline is complicated and time-consuming, 2) the duration extracted from the
+teacher model is not accurate enough, and the target mel-spectrograms distilled
+from teacher model suffer from information loss due to data simplification,
+both of which limit the voice quality. In this paper, we propose FastSpeech 2,
+which addresses the issues in FastSpeech and better solves the one-to-many
+mapping problem in TTS by 1) directly training the model with ground-truth
+target instead of the simplified output from teacher, and 2) introducing more
+variation information of speech (e.g., pitch, energy and more accurate
+duration) as conditional inputs. Specifically, we extract duration, pitch and
+energy from speech waveform and directly take them as conditional inputs in
+training and use predicted values in inference. We further design FastSpeech
+2s, which is the first attempt to directly generate speech waveform from text
+in parallel, enjoying the benefit of fully end-to-end inference. Experimental
+results show that 1) FastSpeech 2 achieves a 3x training speed-up over
+FastSpeech, and FastSpeech 2s enjoys even faster inference speed; 2) FastSpeech
+2 and 2s outperform FastSpeech in voice quality, and FastSpeech 2 can even
+surpass autoregressive models. Audio samples are available at
+https://speechresearch.github.io/fastspeech2/.},
+ arxiv_url = {https://arxiv.org/pdf/2006.04558v8.pdf},
+ author = {Yi Ren and Chenxu Hu and Xu Tan and Tao Qin and Sheng Zhao and Zhou Zhao and Tie-Yan Liu},
+ title = {Fastspeech 2: Fast and high-quality end-to-end text to speech},
+ year = {2020}
+}
+
+@article{zhang_2022_cab,
+ abstract = {Transformer has achieved remarkable success in language, image, and speech
+processing. Recently, various efficient attention architectures have been
+proposed to improve transformer's efficiency while largely preserving its
+efficacy, especially in modeling long sequences. A widely-used benchmark to
+test these efficient methods' capability on long-range modeling is Long Range
+Arena (LRA). However, LRA only focuses on the standard bidirectional (or
+noncausal) self attention, and completely ignores cross attentions and
+unidirectional (or causal) attentions, which are equally important to
+downstream applications. In this paper, we propose Comprehensive Attention
+Benchmark (CAB) under a fine-grained attention taxonomy with four
+distinguishable attention patterns, namely, noncausal self, causal self,
+noncausal cross, and causal cross attentions. CAB collects seven real-world
+tasks from different research areas to evaluate efficient attentions under the
+four attention patterns. Among these tasks, CAB validates efficient attentions
+in eight backbone networks to show their generalization across neural
+architectures. We conduct exhaustive experiments to benchmark the performances
+of nine widely-used efficient attention architectures designed with different
+philosophies on CAB. Extensive experimental results also shed light on the
+fundamental problems of efficient attentions, such as efficiency length against
+vanilla attention, performance consistency across attention patterns, the
+benefit of attention mechanisms, and interpolation/extrapolation on
+long-context language modeling.},
+ arxiv_url = {https://arxiv.org/pdf/2210.07661v4.pdf},
+ author = {Jun Zhang and Shuyang Jiang and Jiangtao Feng and Lin Zheng and Lingpeng Kong},
+ title = {CAB: Comprehensive Attention Benchmarking on Long Sequence Modeling},
+ year = {2022}
+}
