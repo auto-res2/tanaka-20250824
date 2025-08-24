@@ -1,0 +1,10 @@
+{
+  "research_topic": "New architecture of small language model",
+  "queries": [
+    "efficient transformer architectures",
+    "sparse attention mechanisms",
+    "MoE small models",
+    "distilled transformer models",
+    "compact LLM quantization"
+  ]
+}
