@@ -1,0 +1,57 @@
+# Default configuration for ProtoHop TinyLM experiments
+seed: 42
+
+# Directories
+data_dir: data
+models_dir: models
+image_dir: .research/iteration1/images
+
+# Which experiments to run
+run_exp1: true
+run_exp2: true
+run_exp3: true
+
+# Experiment 1: Streaming LM
+exp1:
+  seed: 42
+  vocab_size: 256
+  d_model: 128
+  n_layers: 2
+  n_heads: 4
+  ffn_hidden: 256
+  S: 32
+  k_top: 4
+  batch_size: 8
+  seq_len: 256
+  train_size: 64
+  lr: 0.001
+  latency_contexts: [256, 512, 1024]
+  latency_warmup: 1
+  latency_steps: 4
+
+# Experiment 2: Cross-Attention alignment
+exp2:
+  seed: 123
+  vocab_size: 512
+  d_model: 128
+  n_heads: 4
+  S: 32
+  chunk_size: 128
+  batch_size: 4
+  src_len: 1024
+  tgt_len: 64
+  train_size: 64
+  lr: 0.001
+  skip_lambda: 0.01
+  back_lambda: 0.1
+  mono_weight: 0.1
+
+# Experiment 3: CSLRP quantization-native classifier
+exp3:
+  seed: 7
+  d_in: 64
+  d_hidden: 128
+  num_classes: 16
+  train_size: 256
+  batch_size: 32
+  lr: 0.002
