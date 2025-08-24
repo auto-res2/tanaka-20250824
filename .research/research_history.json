@@ -6,5 +6,52 @@
     "MoE small models",
     "distilled transformer models",
     "compact LLM quantization"
+  ],
+  "research_study_list": [
+    {
+      "title": "Reformer: The Efficient Transformer"
+    },
+    {
+      "title": "Searching for Efficient Transformers for Language Modeling"
+    },
+    {
+      "title": "CAB: Comprehensive Attention Benchmarking on Long Sequence Modeling"
+    },
+    {
+      "title": "O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers"
+    },
+    {
+      "title": "SAC: Accelerating and Structuring Self-Attention via Sparse Adaptive Connection"
+    },
+    {
+      "title": "On Sparse Modern Hopfield Model"
+    },
+    {
+      "title": "MoEUT: Mixture-of-Experts Universal Transformers"
+    },
+    {
+      "title": "$\\texttt{MoE-RBench}$: Towards Building Reliable Language Models with Sparse Mixture-of-Experts"
+    },
+    {
+      "title": "Pushing Mixture of Experts to the Limit: Extremely Parameter Efficient MoE for Instruction Tuning"
+    },
+    {
+      "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers"
+    },
+    {
+      "title": "Few-shot Task-agnostic Neural Architecture Search for Distilling Large Language Models"
+    },
+    {
+      "title": "What is Dataset Distillation Learning?"
+    },
+    {
+      "title": "QLLM: Accurate and Efficient Low-Bitwidth Quantization for Large Language Models"
+    },
+    {
+      "title": "Extreme Compression of Large Language Models via Additive Quantization"
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models"
+    }
   ]
 }
